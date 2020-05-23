@@ -11,7 +11,7 @@ ARGUMENTS:
     <code>                  license code, e.g. license get MIT
                             run "license list" to see all codes
     help, -help, --help     show this help message
-  `;
+`;
 }
 
 // get

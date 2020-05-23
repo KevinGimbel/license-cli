@@ -6,11 +6,11 @@ export function info_help(): string {
 Get more information on a specific license
 
 ARGUMENTS:
-<code>                  license code, e.g. "license info mit" or
-                        "license apache", "license info gpl"
-                        works with a "best match" so may return 
-                        multiple licenses
-help, -help, --help     show this help message
+    <code>                  license code, e.g. "license info mit" or
+                            "license apache", "license info gpl"
+                            works with a "best match" so may return 
+                            multiple licenses
+    help, -help, --help     show this help message
   `;
 }
 

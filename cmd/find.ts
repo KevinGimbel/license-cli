@@ -8,10 +8,10 @@ Find a license by searching through its Limitations, Conditions,
 Permissions, Title, and Description fields.
 
 ARGUMENTS:
-<search-string>         the string to search for in the fields mentioned
-                        above.
--s, --short             Only show license title and code
-help, -help, --help     show this help message
+    <search-string>         the string to search for in the fields mentioned
+                            above.
+    -s, --short             Only show license title and code
+    help, -help, --help     show this help message
 
 EXAMPLE:
 
@@ -38,11 +38,11 @@ Permissions: commercial-use, modifications, distribution, patent-use, private-us
   `;
 }
 
-export function find(code: string, short?: boolean) {
+export function find(code: string, short?: boolean): void {
   let lowercase_code: string = code.toLowerCase();
 
   if (lowercase_code == undefined) {
-    console.error("<search-string> is required.");
+    console.log("<search-string> is required.");
     return;
   }
 
