@@ -1,4 +1,4 @@
-#!/usr/bin/env deno run --allow-read --allow-write --unstable
+#!/usr/bin/env -S deno run -q --unstable --allow-read --allow-write
 import {
   get,
   get_help,
@@ -9,7 +9,7 @@ import {
   list,
   list_help,
 } from "./cmd/mod.ts";
-import { writeFileStr } from "https://deno.land/std/fs/mod.ts";
+import { writeFileStr } from "https://deno.land/std@0.51.0/fs/mod.ts";
 
 function main() {
   let cmd: string | undefined = Deno.args[0];
