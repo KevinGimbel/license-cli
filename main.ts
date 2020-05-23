@@ -1,4 +1,4 @@
-#!/usr/bin/env deno run -q --allow-read --allow-write=. --unstable
+#!/usr/bin/env deno run --allow-read --allow-write --unstable
 import {
   get,
   get_help,
@@ -12,14 +12,14 @@ import {
 import { writeFileStr } from "https://deno.land/std/fs/mod.ts";
 
 function main() {
-  let cmd = Deno.args[0];
-  let short_mode =
+  let cmd: string | undefined = Deno.args[0];
+  let short_mode: boolean =
     (Deno.args.indexOf("-s") >= 0 || Deno.args.indexOf("--short") >= 0);
-  let is_help =
+  let is_help: boolean =
     (Deno.args.indexOf("-h") >= 0 || Deno.args.indexOf("--help") >= 0 ||
       Deno.args.indexOf("help") >= 0);
 
-  let command_input = Deno.args[1];
+  let command_input: string | undefined = Deno.args[1];
 
   switch (cmd) {
     case "get":
@@ -27,8 +27,7 @@ function main() {
         console.log(get_help());
       } else {
         if (command_input) {
-          let license_text = get(command_input);
-          console.log(license_text);
+          let license_text: string = get(command_input);
           writeFileStr("LICENSE", license_text);
         } else {
           console.log("Argument <code> cannot be empty");
@@ -72,11 +71,11 @@ function main() {
       break;
 
     default:
-      console.error(`Unknown command: ${cmd}.\n\n${help()}`);
+      console.error(`Unknown command: ${cmd}.\n\n${main_help()}`);
   }
 }
 
-function help(): string {
+function main_help(): string {
   return `USAGE: license [command ] [arguments]
 
 COMMANDS:
