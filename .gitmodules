@@ -1,0 +1,3 @@
+[submodule "scripts/choosealicense.com"]
+	path = scripts/choosealicense.com
+	url = https://github.com/github/choosealicense.com.git
