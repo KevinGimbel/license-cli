@@ -1,21 +1,36 @@
-import { load } from "https://deno.land/x/js_yaml_port/js-yaml.js";
-import { readFileStr, writeFileStr } from "https://deno.land/std/fs/mod.ts";
-import { basename } from "https://deno.land/std/path/mod.ts";
-
-// import * as path from "https://deno.land/std/path/mod.ts";
+#!/usr/bin/env -S deno run -q --unstable --allow-read=. --allow-write=../data
+import { load } from "https://deno.land/x/js_yaml_port@3.14.0/js-yaml.js";
+import {
+  readFileStr,
+  writeFileStr,
+} from "https://deno.land/std@0.51.0/fs/mod.ts";
+import { basename } from "https://deno.land/std@0.52.0/path/mod.ts";
+import { License } from "../data/types.ts";
 
 async function convert_license_file_to_json(filename: string) {
-  let license_as_obj = { text: "" };
+  let license_as_obj: License = {
+    title: "",
+    "spdx-id": "",
+    description: "",
+    how: "",
+    using: [""],
+    permissions: [""],
+    conditions: [""],
+    limitations: [""],
+    text: "",
+  };
   let file = await readFileStr(filename);
   let front_matter = file.match(/^---[\s\S]+?---/i)?.toString();
   let license_text = file.split("---")[2];
 
   if (front_matter) {
-    license_as_obj = load(front_matter.substr(0, front_matter.length - 3));
-    license_as_obj.text = license_text.toString();
+    license_as_obj = {
+      text: license_text.toString(),
+      ...load(front_matter.substr(0, front_matter.length - 3)),
+    };
+    // license_as_obj.text = license_text.toString();
   }
 
-  // await writeFileStr(`${filename}.json`, JSON.stringify(license_as_obj));
   await write_ts_file(filename, license_as_obj);
 }
 
@@ -44,4 +59,7 @@ function main() {
   convert_license_file_to_json(Deno.args[0]);
 }
 
-main();
+// If this is run as a CLI script, execute the main function
+if (import.meta.main) {
+  main();
+}
