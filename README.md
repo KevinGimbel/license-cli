@@ -20,8 +20,12 @@ This project is still `WORK IN PROGRESS` as I try to understand Deno better. You
 ## Install
 
 ```bash
-deno install -n license  --unstable --allow-read --allow-write https://raw.githubusercontent.com/kevingimbel/license-cli/master/main.ts
+deno install -n license  --unstable --allow-write https://raw.githubusercontent.com/kevingimbel/license-cli/master/main.ts
 ```
+
+License needs the following flags / permissions:
+- `--allow-write` so it can write the `LICENSE` file
+- `--unstable` because the std library is currently marked unstable
 
 ## Usage
 
