@@ -13,19 +13,13 @@ import { Darg } from "https://raw.githubusercontent.com/kevingimbel/darg/master/
 
 import { writeFileStr, exists } from "https://deno.land/std@0.51.0/fs/mod.ts";
 
-function log_arg_required(arg: string) {
-  console.error(`Error: Argument ${arg} (or -${arg[0]}, --${arg}) is required`);
-}
-
 const darg = new Darg();
 
 function main() {
   let cmd: string | undefined = Deno.args[0];
   let short_mode: boolean =
     (Deno.args.indexOf("-s") >= 0 || Deno.args.indexOf("--short") >= 0);
-  let is_help: boolean =
-    (Deno.args.indexOf("-h") >= 0 || Deno.args.indexOf("--help") >= 0 ||
-      Deno.args.indexOf("help") >= 0);
+  let is_help: boolean = darg.is_help();
 
   let arg_user: string = darg.parse("user", true).unwrap();
   let arg_year: string = darg.parse("year").unwrap_or(
