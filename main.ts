@@ -9,7 +9,7 @@ import {
   list,
   list_help,
 } from "./cmd/mod.ts";
-import { Darg } from "https://raw.githubusercontent.com/kevingimbel/darg/master/src/mod.ts";
+import { Darg } from "https://raw.githubusercontent.com/kevingimbel/darg/0.1/src/mod.ts";
 
 import { writeFileStr, exists } from "https://deno.land/std@0.51.0/fs/mod.ts";
 
