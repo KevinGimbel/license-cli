@@ -34,6 +34,7 @@ export function display_license(license: License, short?: boolean) {
     console.log(`${title} (${spdx_id})`);
   } else {
     console.log("========================================");
+    console.log(`${title} (${spdx_id})`);
     console.log(`Description:\n${license.description}`);
     console.log("");
     console.log(`Conditions:  ${license.conditions.join(", ")}`);

@@ -9,7 +9,15 @@ import {
   list,
   list_help,
 } from "./cmd/mod.ts";
-import { writeFileStr } from "https://deno.land/std@0.51.0/fs/mod.ts";
+import { Darg } from "https://raw.githubusercontent.com/kevingimbel/darg/master/src/mod.ts";
+
+import { writeFileStr, exists } from "https://deno.land/std@0.51.0/fs/mod.ts";
+
+function log_arg_required(arg: string) {
+  console.error(`Error: Argument ${arg} (or -${arg[0]}, --${arg}) is required`);
+}
+
+const darg = new Darg();
 
 function main() {
   let cmd: string | undefined = Deno.args[0];
@@ -19,6 +27,12 @@ function main() {
     (Deno.args.indexOf("-h") >= 0 || Deno.args.indexOf("--help") >= 0 ||
       Deno.args.indexOf("help") >= 0);
 
+  let arg_user: string = darg.parse("user", true).unwrap();
+  let arg_year: string = darg.parse("year").unwrap_or(
+    new Date().getFullYear().toString(),
+  );
+  let arg_project: string = darg.parse("project").unwrap_or("");
+
   let command_input: string | undefined = Deno.args[1];
 
   switch (cmd) {
@@ -27,7 +41,12 @@ function main() {
         console.log(get_help());
       } else {
         if (command_input) {
-          let license_text: string = get(command_input);
+          let license_text: string = get(
+            command_input,
+            arg_user,
+            arg_year,
+            arg_project,
+          );
           writeFileStr("LICENSE", license_text);
         } else {
           console.log("Argument <code> cannot be empty");

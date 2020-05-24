@@ -15,16 +15,26 @@ ARGUMENTS:
 }
 
 // get
-export function get(a: string): string {
-  return load_license(a);
+export function get(
+  a: string,
+  arg_user: string,
+  arg_year: string,
+  arg_project: string,
+): string {
+  return load_license(a, arg_user, arg_year, arg_project);
 }
 
 // load_license
-function load_license(name: string): string {
+function load_license(
+  name: string,
+  arg_user: string,
+  arg_year: string,
+  arg_project: string,
+): string {
   // TODO(kevin): These need to be retrieved from env or config / cli args
-  const date = new Date().getFullYear().toString();
-  const copyright_name = "Kevin Gimbel";
-  const project = "license-cli";
+  const date = arg_year;
+  const copyright_name = arg_user;
+  const project = arg_project;
 
   let license_text: string = load_license_text(name);
   let clean_text: string = "";
